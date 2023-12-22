@@ -1,10 +1,14 @@
 import React from "react"
 
-function User({ user }) {
+function User({ user, setDisplayEditUser, updateUser }) {
   return (
     <div
       className="border border-dark d-flex flex-column align-items-center justify-content-center"
-      style={{ width: "200px", height: "300px" }}
+      style={{ width: "200px", height: "300px", cursor: "pointer" }}
+      onClick={() => {
+        updateUser(user.id)
+        setDisplayEditUser(true)
+      }}
     >
       <img src={user.picture} alt="" />
       <div className="d-flex gap-1">

@@ -4,10 +4,13 @@ import woman from "../assets/woman.png"
 import User from "./User"
 import FormAddUser from "./FormAddUser"
 import { v4 as uuidv4 } from "uuid"
+import FormEditUser from "./FormEditUser"
 
 function Users() {
   const [users, setUsers] = useState([])
+  const [user, setUser] = useState({})
   const [displayFormAddUser, setDisplayFormAddUser] = useState(false)
+  const [displayEditUser, setDisplayEditUser] = useState(false)
 
   useEffect(() => {
     setUsers([
@@ -52,12 +55,24 @@ function Users() {
       { id: uuidv4(), picture: user.genre === "homme" ? man : woman, ...user },
     ])
   }
+
+  const updateUser = (id_user) => {
+    const currentUser = [...users].find((u) => u.id === id_user)
+    setUser(currentUser)
+  }
+
   return (
     <>
       {displayFormAddUser && (
         <FormAddUser
           setDisplayFormAddUser={setDisplayFormAddUser}
           validateUser={validateUser}
+        />
+      )}
+      {displayEditUser && (
+        <FormEditUser
+          setDisplayEditUser={setDisplayEditUser}
+          currentUser={user}
         />
       )}
       <h1 className="text-center my-5">Liste des utilisateurs</h1>
@@ -71,7 +86,14 @@ function Users() {
       </div>
       <div className="d-flex justify-content-center gap-5 flex-wrap">
         {users.map((user, key) => {
-          return <User user={user} key={key} />
+          return (
+            <User
+              user={user}
+              key={key}
+              setDisplayEditUser={setDisplayEditUser}
+              updateUser={updateUser}
+            />
+          )
         })}
       </div>
     </>
