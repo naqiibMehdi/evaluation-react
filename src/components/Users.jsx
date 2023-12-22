@@ -57,14 +57,29 @@ function Users() {
   }
 
   const getCurrentUser = (id_user) => {
-    const currentUser = [...users].find((u) => u.id === id_user)
+    const currentUser = [...users].find(
+      (u) => u.id.toString() === id_user.toString()
+    )
     setUser(currentUser)
   }
 
   const updateUser = (id_user, user) => {
     const newUsers = [...users]
-    const indexUser = newUsers.findIndex((u) => u.id === id_user)
-    newUsers[indexUser] = { ...newUsers[indexUser], ...user }
+    const indexUser = newUsers.findIndex(
+      (u) => u.id.toString() === id_user.toString()
+    )
+    newUsers[indexUser] = {
+      ...newUsers[indexUser],
+      ...user,
+      picture: user.genre === "homme" ? man : woman,
+    }
+    setUsers(newUsers)
+  }
+
+  const deleteUser = (id_user) => {
+    const newUsers = [...users].filter(
+      (u) => u.id.toString() !== id_user.toString()
+    )
     setUsers(newUsers)
   }
 
@@ -81,6 +96,7 @@ function Users() {
           setDisplayEditUser={setDisplayEditUser}
           currentUser={user}
           updateUser={updateUser}
+          deleteUser={deleteUser}
         />
       )}
       <h1 className="text-center my-5">Liste des utilisateurs</h1>

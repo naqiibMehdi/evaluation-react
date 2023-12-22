@@ -12,8 +12,8 @@ function User({ user, setDisplayEditUser, getCurrentUser }) {
     >
       <img src={user.picture} alt="" />
       <div className="d-flex gap-1">
-        <p>{user.firstname}</p>
-        <p>{user.lastname}</p>
+        <p className="text-capitalize">{user.firstname}</p>
+        <p className="text-uppercase">{user.lastname}</p>
       </div>
       <p>Age: {user.age}</p>
       <p>Genre: {user.genre}</p>

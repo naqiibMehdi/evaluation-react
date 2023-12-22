@@ -14,8 +14,8 @@ function FormEditUser({
   }
 
   return (
-    <div className="popup-overlay">
-      <div className="w-25">
+    <div className="popup-overlay" onClick={() => setDisplayEditUser(false)}>
+      <div className="w-25" onClick={(e) => e.stopPropagation()}>
         <form
           className="bg-white p-3 rounded h-100 d-flex flex-column gap-4"
           onSubmit={(e) => {
@@ -24,7 +24,7 @@ function FormEditUser({
             setDisplayEditUser(false)
           }}
         >
-          <p className="fs-2">Ajouter un utilisateur</p>
+          <p className="fs-2">Éditer un utilisateur</p>
           <div className="form-group">
             <label htmlFor="lastname">Nom</label>
             <input
@@ -75,7 +75,10 @@ function FormEditUser({
           <div className="d-flex flex-column row-gap-3">
             <button
               className="btn btn-danger"
-              onClick={() => deleteUser(currentUser.id)}
+              onClick={() => {
+                deleteUser(currentUser.id)
+                setDisplayEditUser(false)
+              }}
             >
               Supprimer l'utilisateur
             </button>

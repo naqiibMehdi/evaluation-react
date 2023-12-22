@@ -9,8 +9,8 @@ function FormAddUser({ setDisplayFormAddUser, validateUser }) {
   }
 
   return (
-    <div className="popup-overlay">
-      <div className="w-25">
+    <div className="popup-overlay" onClick={() => setDisplayFormAddUser(false)}>
+      <div className="w-25" onClick={(e) => e.stopPropagation()}>
         <form
           className="bg-white p-3 rounded h-100 d-flex flex-column gap-4"
           onSubmit={(e) => {
@@ -21,7 +21,9 @@ function FormAddUser({ setDisplayFormAddUser, validateUser }) {
         >
           <p className="fs-2">Ajouter un utilisateur</p>
           <div className="form-group">
-            <label htmlFor="lastname">Nom</label>
+            <label htmlFor="lastname" className="mb-2">
+              Nom
+            </label>
             <input
               type="text"
               className="form-control"
@@ -32,7 +34,9 @@ function FormAddUser({ setDisplayFormAddUser, validateUser }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="firstname">Prénom</label>
+            <label htmlFor="firstname" className="mb-2">
+              Prénom
+            </label>
             <input
               type="text"
               className="form-control"
@@ -43,7 +47,9 @@ function FormAddUser({ setDisplayFormAddUser, validateUser }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="age">Age</label>
+            <label htmlFor="age" className="mb-2">
+              Age
+            </label>
             <input
               type="number"
               className="form-control"
@@ -53,11 +59,13 @@ function FormAddUser({ setDisplayFormAddUser, validateUser }) {
               onChange={handleChangeUser}
             />
           </div>
+          <label htmlFor="genre">Genre</label>
           <select
             className="form-select"
             onChange={handleChangeUser}
             value={addUser.genre || ""}
             name="genre"
+            id="genre"
           >
             <option value="">-</option>
             <option value="homme" name="genre">
