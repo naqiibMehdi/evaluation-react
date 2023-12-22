@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react"
 import man from "../assets/man.png"
 import woman from "../assets/woman.png"
 import User from "./User"
+import FormAddUser from "./FormAddUser"
 
 function Users() {
   const [users, setUsers] = useState([])
+  const [displayFormAddUser, setDisplayFormAddUser] = useState(false)
 
   useEffect(() => {
     setUsers([
@@ -53,9 +55,15 @@ function Users() {
 
   return (
     <>
+      {displayFormAddUser && <FormAddUser />}
       <h1 className="text-center my-5">Liste des utilisateurs</h1>
       <div className="row w-25 mx-auto mb-5">
-        <button className="btn btn-primary">Ajouter un utilisateur</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => setDisplayFormAddUser(true)}
+        >
+          Ajouter un utilisateur
+        </button>
       </div>
       <div className="d-flex justify-content-center gap-5 flex-wrap">
         {users.map((user, key) => {
