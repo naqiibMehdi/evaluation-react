@@ -56,9 +56,16 @@ function Users() {
     ])
   }
 
-  const updateUser = (id_user) => {
+  const getCurrentUser = (id_user) => {
     const currentUser = [...users].find((u) => u.id === id_user)
     setUser(currentUser)
+  }
+
+  const updateUser = (id_user, user) => {
+    const newUsers = [...users]
+    const indexUser = newUsers.findIndex((u) => u.id === id_user)
+    newUsers[indexUser] = { ...newUsers[indexUser], ...user }
+    setUsers(newUsers)
   }
 
   return (
@@ -73,6 +80,7 @@ function Users() {
         <FormEditUser
           setDisplayEditUser={setDisplayEditUser}
           currentUser={user}
+          updateUser={updateUser}
         />
       )}
       <h1 className="text-center my-5">Liste des utilisateurs</h1>
@@ -91,7 +99,7 @@ function Users() {
               user={user}
               key={key}
               setDisplayEditUser={setDisplayEditUser}
-              updateUser={updateUser}
+              getCurrentUser={getCurrentUser}
             />
           )
         })}

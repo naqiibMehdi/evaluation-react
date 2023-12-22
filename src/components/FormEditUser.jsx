@@ -1,11 +1,16 @@
 import React, { useState } from "react"
 
-function FormEditUser({ setDisplayEditUser, currentUser }) {
-  const [addUser, setAddUser] = useState({})
+function FormEditUser({
+  setDisplayEditUser,
+  currentUser,
+  updateUser,
+  deleteUser,
+}) {
+  const [editUser, setEditUser] = useState({})
 
   const handleChangeUser = (e) => {
     const { name, value } = e.target
-    setAddUser((prev) => ({ ...prev, [name]: value }))
+    setEditUser((prev) => ({ ...prev, [name]: value }))
   }
 
   return (
@@ -15,6 +20,8 @@ function FormEditUser({ setDisplayEditUser, currentUser }) {
           className="bg-white p-3 rounded h-100 d-flex flex-column gap-4"
           onSubmit={(e) => {
             e.preventDefault()
+            updateUser(currentUser.id, editUser)
+            setDisplayEditUser(false)
           }}
         >
           <p className="fs-2">Ajouter un utilisateur</p>
@@ -25,7 +32,7 @@ function FormEditUser({ setDisplayEditUser, currentUser }) {
               className="form-control"
               id="lastname"
               name="lastname"
-              value={addUser.lastname || currentUser.lastname}
+              value={editUser.lastname || currentUser.lastname}
               onChange={handleChangeUser}
             />
           </div>
@@ -36,7 +43,7 @@ function FormEditUser({ setDisplayEditUser, currentUser }) {
               className="form-control"
               id="firstname"
               name="firstname"
-              value={addUser.firstname || currentUser.firstname}
+              value={editUser.firstname || currentUser.firstname}
               onChange={handleChangeUser}
             />
           </div>
@@ -47,14 +54,14 @@ function FormEditUser({ setDisplayEditUser, currentUser }) {
               className="form-control"
               id="age"
               name="age"
-              value={addUser.age || currentUser.age}
+              value={editUser.age || currentUser.age}
               onChange={handleChangeUser}
             />
           </div>
           <select
             className="form-select"
             onChange={handleChangeUser}
-            value={addUser.genre || currentUser.genre}
+            value={editUser.genre || currentUser.genre}
             name="genre"
           >
             <option value="">-</option>
@@ -66,7 +73,10 @@ function FormEditUser({ setDisplayEditUser, currentUser }) {
             </option>
           </select>
           <div className="d-flex flex-column row-gap-3">
-            <button className="btn btn-danger" type="submit">
+            <button
+              className="btn btn-danger"
+              onClick={() => deleteUser(currentUser.id)}
+            >
               Supprimer l'utilisateur
             </button>
             <button className="btn btn-success" type="submit">

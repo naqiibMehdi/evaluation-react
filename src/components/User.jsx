@@ -1,12 +1,12 @@
 import React from "react"
 
-function User({ user, setDisplayEditUser, updateUser }) {
+function User({ user, setDisplayEditUser, getCurrentUser }) {
   return (
     <div
       className="border border-dark d-flex flex-column align-items-center justify-content-center"
       style={{ width: "200px", height: "300px", cursor: "pointer" }}
       onClick={() => {
-        updateUser(user.id)
+        getCurrentUser(user.id)
         setDisplayEditUser(true)
       }}
     >
