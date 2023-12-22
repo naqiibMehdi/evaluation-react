@@ -44,11 +44,17 @@ function Users() {
   }, [])
 
   return (
-    <div className="w-100 d-flex">
-      {users.map((user, key) => {
-        return <User user={user} key={key} />
-      })}
-    </div>
+    <>
+      <h1 className="text-center my-5">Liste des utilisateurs</h1>
+      <div className="row w-25 mx-auto mb-5">
+        <button className="btn btn-primary">Ajouter un utilisateur</button>
+      </div>
+      <div className="d-flex justify-content-center gap-5 flex-wrap">
+        {users.map((user, key) => {
+          return <User user={user} key={key} />
+        })}
+      </div>
+    </>
   )
 }
 
