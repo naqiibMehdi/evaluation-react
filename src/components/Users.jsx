@@ -40,6 +40,14 @@ function Users() {
         age: 45,
         genre: "femme",
       },
+      {
+        id: 4,
+        firstname: "carine",
+        lastname: "carre",
+        picture: woman,
+        age: 45,
+        genre: "femme",
+      },
     ])
   }, [])
 
